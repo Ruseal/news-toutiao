@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            position: absolute;
+            width: 200px;
+            height: 150px;
+            /* left: 300px */
+            /* margin-left: 0px; */
+        }
+    </style>
+</head>
+<body>
+    <img src="./public/image/a.jpg" alt="">
+    <script>
+        let img = document.querySelector('img')
+        function annimate (nodeObj, distance, callback) {
+            let stepObj = {stepLength: 0}
+            let timer = setInterval(() => {
+                stepObj.stepLength = (distance - nodeObj.offsetLeft)/10
+                console.log(stepObj.stepLength);
+                if(distance===nodeObj.offsetLeft){
+                    clearInterval(timer)
+                    callback && callback()
+                }
+                stepObj.stepLength = stepObj.stepLength > 0? Math.ceil(stepObj.stepLength): Math.floor(stepObj.stepLength)
+                nodeObj.style.left = stepObj.stepLength+nodeObj.offsetLeft+'px'
+            }, 15);
+       }
+       annimate(img,300)
+    </script>
+</body>
+</html>
